@@ -29,7 +29,7 @@ const Home = () => (
     
 
     {/* Top banner ad */}
-   
+   <Advertisement type="banner" count={1} />
 
     <div className="featured-videos">
       <h2>Featured Videos</h2>
