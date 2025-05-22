@@ -1,0 +1,41 @@
+.listening-container {
+    padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .listening-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #1f4e79;
+  }
+  
+  .listening-container section {
+    margin-top: 2rem;
+    background-color: #f0f8ff;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .listening-container h3 {
+    font-size: 1.4rem;
+    color: #1a3d6d;
+    margin-bottom: 0.75rem;
+  }
+  
+  .listening-container ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .listening-container li {
+    margin-bottom: 1rem;
+  }
+  
+  audio {
+    display: block;
+    margin-top: 0.5rem;
+  }
+  

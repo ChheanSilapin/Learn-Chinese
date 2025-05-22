@@ -1,0 +1,130 @@
+.quizzes-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.quizzes-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1f4e79;
+}
+
+.quizzes-container h3 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+  color: #1f4e79;
+}
+
+.quizzes-container p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.quiz-box {
+  background-color: #fdfdfd;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 1.5rem 0;
+}
+
+.question {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+}
+
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.option-button:hover {
+  background-color: #e0e0e0;
+}
+
+.option-button.correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+}
+
+.option-button.incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+}
+
+.feedback {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.feedback.correct {
+  color: #28a745;
+}
+
+.feedback.incorrect {
+  color: #dc3545;
+}
+
+.next-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.next-button:hover {
+  background-color: #0069d9;
+}
+
+/* Quiz content layout */
+.quiz-content-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.quiz-main-content {
+  flex: 1 1 60%;
+  min-width: 300px;
+}
+
+.quiz-sidebar {
+  flex: 1 1 30%;
+  min-width: 250px;
+}
+
+@media (max-width: 768px) {
+  .quiz-content-layout {
+    flex-direction: column;
+  }
+
+  .quiz-main-content,
+  .quiz-sidebar {
+    width: 100%;
+  }
+}
