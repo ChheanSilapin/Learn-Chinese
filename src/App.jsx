@@ -50,7 +50,7 @@ const Home = () => (
     </div>
 
     {/* Bottom banner ad */}
-    <Advertisement type="banner" count={2} />
+    <Advertisement type="banner" count={1} />
   </div>
 );
 
