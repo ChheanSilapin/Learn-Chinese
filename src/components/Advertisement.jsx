@@ -44,42 +44,55 @@ const ScriptAd = ({ adCode }) => {
 
   useEffect(() => {
     if (adRef.current && adCode) {
+      console.log('Setting up ad with code:', adCode);
+      const container = adRef.current;
+
       // Clear any existing content
-      adRef.current.innerHTML = '';
+      container.innerHTML = '';
 
-      // Create a temporary div to parse the HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = adCode;
+      // Add a unique ID for this ad instance
+      const adId = `ad-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+      container.id = adId;
 
-      // Execute scripts manually
-      const scripts = tempDiv.querySelectorAll('script');
-      scripts.forEach(script => {
-        const newScript = document.createElement('script');
-
-        if (script.src) {
-          newScript.src = script.src;
-          newScript.async = true;
-        } else {
-          newScript.textContent = script.textContent;
-        }
-
-        // Add script attributes
-        Array.from(script.attributes).forEach(attr => {
-          newScript.setAttribute(attr.name, attr.value);
-        });
-
-        document.head.appendChild(newScript);
-      });
-
-      // Add non-script content to the container
-      const nonScriptContent = tempDiv.innerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-      if (nonScriptContent.trim()) {
-        adRef.current.innerHTML = nonScriptContent;
+      // Set up the ad configuration globally
+      if (typeof window !== 'undefined') {
+        window.atOptions = {
+          'key': '88766f3d2fa03e6d0c422d04fb80bb75',
+          'format': 'iframe',
+          'height': 90,
+          'width': 728,
+          'params': {}
+        };
       }
+
+      // Add the script directly to the container
+      const scriptElement = document.createElement('script');
+      scriptElement.type = 'text/javascript';
+      scriptElement.async = true;
+      scriptElement.src = 'https://www.highperformanceformat.com/88766f3d2fa03e6d0c422d04fb80bb75/invoke.js';
+
+      scriptElement.onload = () => {
+        console.log('Ad script loaded successfully for', adId);
+      };
+
+      scriptElement.onerror = (error) => {
+        console.error('Ad script failed to load:', error);
+        container.innerHTML = '<div style="background: #f0f0f0; padding: 20px; text-align: center; border: 1px dashed #ccc; color: #666;">Advertisement Space</div>';
+      };
+
+      // Append script to container
+      container.appendChild(scriptElement);
+
+      // Cleanup function
+      return () => {
+        if (container) {
+          container.innerHTML = '';
+        }
+      };
     }
   }, [adCode]);
 
-  return <div ref={adRef} className="ad-item ad-script-item" />;
+  return <div ref={adRef} className="ad-item ad-script-item" style={{ minHeight: '90px', textAlign: 'center' }} />;
 };
 
 /**

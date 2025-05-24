@@ -58,16 +58,32 @@
 /* Script-based ad styles */
 .ad-script-item {
   min-height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: 728px;
+  margin: 0 auto;
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
 
 .ad-script-item iframe {
-  max-width: 100%;
-  height: auto;
+  width: 100% !important;
+  height: 90px !important;
+  border: none;
+  display: block;
+}
+
+/* Loading state for ads */
+.ad-script-item:empty::before {
+  content: "Loading advertisement...";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  color: #666;
+  font-size: 14px;
 }
 
 .ad-link {
