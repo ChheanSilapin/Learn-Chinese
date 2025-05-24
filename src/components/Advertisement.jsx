@@ -44,7 +44,6 @@ const ScriptAd = ({ adCode }) => {
 
   useEffect(() => {
     if (adRef.current && adCode) {
-      console.log('Setting up ad with code:', adCode);
       const container = adRef.current;
 
       // Clear any existing content
@@ -56,7 +55,8 @@ const ScriptAd = ({ adCode }) => {
 
       // Set up the ad configuration globally
       if (typeof window !== 'undefined') {
-        window.atOptions = {
+        const globalWindow = window;
+        globalWindow.atOptions = {
           'key': '88766f3d2fa03e6d0c422d04fb80bb75',
           'format': 'iframe',
           'height': 90,
@@ -71,12 +71,7 @@ const ScriptAd = ({ adCode }) => {
       scriptElement.async = true;
       scriptElement.src = 'https://www.highperformanceformat.com/88766f3d2fa03e6d0c422d04fb80bb75/invoke.js';
 
-      scriptElement.onload = () => {
-        console.log('Ad script loaded successfully for', adId);
-      };
-
-      scriptElement.onerror = (error) => {
-        console.error('Ad script failed to load:', error);
+      scriptElement.onerror = () => {
         container.innerHTML = '<div style="background: #f0f0f0; padding: 20px; text-align: center; border: 1px dashed #ccc; color: #666;">Advertisement Space</div>';
       };
 

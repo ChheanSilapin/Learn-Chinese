@@ -31,23 +31,6 @@ const Home = () => (
     {/* Top banner ad */}
    <Advertisement type="banner" count={1} />
 
-   {/* Debug: Direct ad test */}
-   <div style={{ margin: '20px 0', padding: '10px', border: '2px solid red', textAlign: 'center' }}>
-     <p>Direct Ad Test:</p>
-     <div dangerouslySetInnerHTML={{
-       __html: `<script type="text/javascript">
-         atOptions = {
-           'key' : '88766f3d2fa03e6d0c422d04fb80bb75',
-           'format' : 'iframe',
-           'height' : 90,
-           'width' : 728,
-           'params' : {}
-         };
-       </script>
-       <script type="text/javascript" src="//www.highperformanceformat.com/88766f3d2fa03e6d0c422d04fb80bb75/invoke.js"></script>`
-     }} />
-   </div>
-
     <div className="featured-videos">
       <h2>Featured Videos</h2>
       <div className="video-grid">
