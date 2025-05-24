@@ -17,23 +17,6 @@ const sampleAds = [
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/88766f3d2fa03e6d0c422d04fb80bb75/invoke.js"></script>`
   },
-  {
-    id: 2,
-    title: "Chinese Dictionary App",
-    description: "Download our app for instant translations",
-    imageUrl: "https://placehold.co/300x200/fff7e6/fa8c16?text=Dictionary+App",
-    link: "https://example.com/dictionary-app",
-    type: "sidebar"
-  },
-  {
-    id: 3,
-    title: "Study in China",
-    description: "Immersive language programs in Beijing",
-    imageUrl: "https://placehold.co/300x200/f6ffed/52c41a?text=Study+Abroad",
-    link: "https://example.com/study-abroad",
-    type: "banner"
-  },
-
 ];
 
 /**
