@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import '../style/Advertisement.css';
 
 // Sample ad data - in a real app, this would come from an ad service
@@ -37,6 +37,52 @@ const sampleAds = [
 ];
 
 /**
+ * ScriptAd component that properly handles script-based ads
+ */
+const ScriptAd = ({ adCode }) => {
+  const adRef = useRef(null);
+
+  useEffect(() => {
+    if (adRef.current && adCode) {
+      // Clear any existing content
+      adRef.current.innerHTML = '';
+
+      // Create a temporary div to parse the HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = adCode;
+
+      // Execute scripts manually
+      const scripts = tempDiv.querySelectorAll('script');
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+
+        if (script.src) {
+          newScript.src = script.src;
+          newScript.async = true;
+        } else {
+          newScript.textContent = script.textContent;
+        }
+
+        // Add script attributes
+        Array.from(script.attributes).forEach(attr => {
+          newScript.setAttribute(attr.name, attr.value);
+        });
+
+        document.head.appendChild(newScript);
+      });
+
+      // Add non-script content to the container
+      const nonScriptContent = tempDiv.innerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+      if (nonScriptContent.trim()) {
+        adRef.current.innerHTML = nonScriptContent;
+      }
+    }
+  }, [adCode]);
+
+  return <div ref={adRef} className="ad-item ad-script-item" />;
+};
+
+/**
  * Advertisement component that displays ads
  * @param {Object} props
  * @param {string} props.type - Type of ad to display ('banner', 'sidebar', or 'random')
@@ -47,15 +93,18 @@ const Advertisement = ({ type = 'banner', count = 1, className = '' }) => {
   // Filter ads by type or get random ads if type is 'random'
   const getAds = () => {
     let filteredAds = sampleAds;
-    
+
     if (type !== 'random') {
       filteredAds = sampleAds.filter(ad => ad.type === type);
     }
-    
-    // Shuffle and get the requested number of ads
-    return filteredAds
-      .sort(() => 0.5 - Math.random())
-      .slice(0, count);
+
+    // Prioritize script-based ads (real ads) over placeholder ads
+    const scriptAds = filteredAds.filter(ad => ad.adCode);
+    const imageAds = filteredAds.filter(ad => !ad.adCode);
+
+    // Return script ads first, then image ads if needed
+    const prioritizedAds = [...scriptAds, ...imageAds];
+    return prioritizedAds.slice(0, count);
   };
 
   const adsToShow = getAds();
@@ -64,8 +113,7 @@ const Advertisement = ({ type = 'banner', count = 1, className = '' }) => {
     <div className={`ad-container ${type}-ad ${className}`}>
       {adsToShow.map(ad => (
         ad.adCode ? (
-          <div key={ad.id} className="ad-item ad-script-item" 
-               dangerouslySetInnerHTML={{ __html: ad.adCode }} />
+          <ScriptAd key={ad.id} adCode={ad.adCode} />
         ) : (
           <div key={ad.id} className="ad-item">
             <a href={ad.link} target="_blank" rel="noopener noreferrer" className="ad-link">

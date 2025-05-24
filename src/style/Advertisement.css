@@ -55,6 +55,21 @@
   background-color: #fff;
 }
 
+/* Script-based ad styles */
+.ad-script-item {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.ad-script-item iframe {
+  max-width: 100%;
+  height: auto;
+}
+
 .ad-link {
   text-decoration: none;
   color: inherit;
@@ -102,15 +117,15 @@
   .sidebar-ad {
     max-width: 100%;
   }
-  
+
   .ad-container {
     margin: 1rem 0;
   }
-  
+
   .ad-title {
     font-size: 1rem;
   }
-  
+
   .ad-description {
     font-size: 0.8rem;
   }
@@ -122,7 +137,7 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
+
   .banner-ad .ad-item {
     flex: 1 1 300px;
     max-width: calc(50% - 0.5rem);
