@@ -5,11 +5,17 @@ import '../style/Advertisement.css';
 const sampleAds = [
   {
     id: 1,
-    title: "Learn Chinese Fast",
-    description: "Premium course with native speakers",
-    imageUrl: "https://placehold.co/300x200/e6f7ff/1890ff?text=Chinese+Course",
-    link: "https://example.com/chinese-course",
-    type: "banner"
+    type: "banner",
+    adCode: `<script type="text/javascript">
+    atOptions = {
+        'key' : '88766f3d2fa03e6d0c422d04fb80bb75',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+    };
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/88766f3d2fa03e6d0c422d04fb80bb75/invoke.js"></script>`
   },
   {
     id: 2,
@@ -57,16 +63,21 @@ const Advertisement = ({ type = 'banner', count = 1, className = '' }) => {
   return (
     <div className={`ad-container ${type}-ad ${className}`}>
       {adsToShow.map(ad => (
-        <div key={ad.id} className="ad-item">
-          <a href={ad.link} target="_blank" rel="noopener noreferrer" className="ad-link">
-            <img src={ad.imageUrl} alt={ad.title} className="ad-image" />
-            <div className="ad-content">
-              <h3 className="ad-title">{ad.title}</h3>
-              <p className="ad-description">{ad.description}</p>
-            </div>
-            <div className="ad-badge">Ad</div>
-          </a>
-        </div>
+        ad.adCode ? (
+          <div key={ad.id} className="ad-item ad-script-item" 
+               dangerouslySetInnerHTML={{ __html: ad.adCode }} />
+        ) : (
+          <div key={ad.id} className="ad-item">
+            <a href={ad.link} target="_blank" rel="noopener noreferrer" className="ad-link">
+              <img src={ad.imageUrl} alt={ad.title} className="ad-image" />
+              <div className="ad-content">
+                <h3 className="ad-title">{ad.title}</h3>
+                <p className="ad-description">{ad.description}</p>
+              </div>
+              <div className="ad-badge">Ad</div>
+            </a>
+          </div>
+        )
       ))}
     </div>
   );
